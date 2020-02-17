@@ -1,8 +1,6 @@
 package org.springbootproject.crudphone.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "characteristic")
@@ -30,15 +28,6 @@ public class Characteristic {
 
     @Column(name = "battery")
     private String battery;
-
-    @ManyToMany(fetch = FetchType.LAZY,
-                cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(
-            name = "phone_characteristic",
-            joinColumns = @JoinColumn(name = "characteristic_id"),
-            inverseJoinColumns = @JoinColumn(name = "phone_id")
-            )
-    private List<Phone> phones = new ArrayList<>();
 
     public Characteristic() {
     }
@@ -99,14 +88,6 @@ public class Characteristic {
         this.battery = battery;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
-    }
-
     @Override
     public String toString() {
         return "Characteristic{" +
@@ -117,7 +98,6 @@ public class Characteristic {
                 ", frontCamera='" + frontCamera + '\'' +
                 ", mainCamera='" + mainCamera + '\'' +
                 ", battery='" + battery + '\'' +
-                ", phones=" + phones +
                 '}';
     }
 }

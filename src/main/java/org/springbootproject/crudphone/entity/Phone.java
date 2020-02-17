@@ -2,8 +2,6 @@ package org.springbootproject.crudphone.entity;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "phone")
@@ -20,14 +18,9 @@ public class Phone {
     @Column(name = "producing_country")
     private String producingCountry;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(
-            name = "phone_characteristic",
-            joinColumns = @JoinColumn(name = "phone_id"),
-            inverseJoinColumns = @JoinColumn(name = "characteristic_id")
-            )
-    private List<Characteristic> characteristics = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "characteristic_id")
+    private Characteristic characteristic;
 
     public Phone() {
     }
@@ -56,8 +49,12 @@ public class Phone {
         this.producingCountry = producingCountry;
     }
 
-    public List<Characteristic> getCharacteristics() {
-        return characteristics;
+    public Characteristic getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(Characteristic characteristic) {
+        this.characteristic = characteristic;
     }
 
     @Override
@@ -66,7 +63,7 @@ public class Phone {
                 "id=" + id +
                 ", model='" + model + '\'' +
                 ", producingCountry='" + producingCountry + '\'' +
-                ", characteristics=" + characteristics +
+                ", characteristic=" + characteristic +
                 '}';
     }
 }
