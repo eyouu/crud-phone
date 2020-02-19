@@ -16,4 +16,4 @@ Project written in Java with with the following frameworks, technologies:
 
 # To run the code
 1. Run **phonedb_create_phone_and_characteristic.sql** from sql-scripts folder to create schema, tables and populate tables with data.
-2. Set up your own database connection (file -> crud-phone/src/main/resources/**application.properties**)
+2. Set up your own database connection in [**application.properties**](https://github.com/eyouu/crud-phone/blob/master/src/main/resources/application.properties)
